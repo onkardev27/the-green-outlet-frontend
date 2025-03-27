@@ -27,7 +27,7 @@ const Register = () => {
   const handleCreateAccount = () => {
     console.log('Registration Data:', registerData);
     navigate('/login');
-  
+
   };
 
   const handleLogin = () => {
