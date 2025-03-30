@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/Register";
 import OurProduct from "./components/OurProduct";
 import Admine from "./components/Admine";
+import ProductDes from "./components/ProductDes";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
         <Route path="/login" element={<Register />} />
         <Route path="/ourproduct" element={<OurProduct />} />
         <Route path="/Admine" element={<Admine />} />
+        <Route path="/ProductDes" element={<ProductDes />} />
+
       </Routes>
     </BrowserRouter>
   );

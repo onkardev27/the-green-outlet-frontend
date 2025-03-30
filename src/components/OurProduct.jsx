@@ -172,7 +172,7 @@ const ourproduct = () => {
                 <p>$2,450</p>
               </div>
 
-              
+
 
 
 
