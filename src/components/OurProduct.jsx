@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Menu, X, ShoppingCart, Heart, Search } from 'lucide-react'; // Add Search here
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
@@ -13,11 +13,40 @@ import shirt2 from '../assets/shirt2.jpg';
 import shirt3 from '../assets/shirt3.jpg';
 import shirt4 from '../assets/shirt4.jpg';
 
-
-
 const ourproduct = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const products = [
+    { name: 'Eligio Jacket in Wool', image: dress1, originalPrice: 9050, price: 3650 },
+    { name: 'Bomber Black Jacket', image: bomber, originalPrice: 5000, price: 2450 },
+    { name: 'Puffer Jacket in Blac', image: Parka, originalPrice: 5000, price: 2450 },
+    { name: 'Stylish Striped Shirt', image: girljacket, originalPrice: 5000, price: 2450 },
+    { name: 'Buttoned Denim Shirt', image: puffer, originalPrice: 5000, price: 2450 },
+    { name: 'Shirt', image: shirt2, originalPrice: 5000, price: 2450 },
+    { name: 'Jeans', image: shirt3, originalPrice: 5000, price: 2450 },
+    { name: 'Wool Jacket', image: shirt4, originalPrice: 5000, price: 2450 }
+  ];
+
+  const sendMessageToWhatsApp = () => {
+    const phoneNumber = ""; // Replace with your actual WhatsApp number
+    const message = encodeURIComponent("Hello! I am interested in your products.");
+    const url = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    window.open(url, "_blank");
+  };
+
+  // Use useMemo to filter products based on search term
+  const filteredProducts = useMemo(() => {
+    if (searchTerm) {
+      return products.filter((each_product) =>
+        each_product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    } else {
+      return products;
+    }
+  }, [searchTerm]);
 
   return (
     <div>
@@ -41,6 +70,13 @@ const ourproduct = () => {
               </button>
               <button onClick={() => navigate('/wishlist')} className="hover:text-blue-500 flex items-center gap-1">
                 <Heart size={22} /> Wishlist
+              </button>
+
+              <button
+                onClick={sendMessageToWhatsApp}
+                className="bg-green-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-green-600"
+              >
+                Support
               </button>
             </div>
 
@@ -100,7 +136,13 @@ const ourproduct = () => {
           <div className="md:col-span-3">
             <div className="flex justify-between items-center mb-6">
               <div className="flex border px-2 py-1 items-center bg-gray-800 rounded">
-                <input type="text" placeholder="Search" className="bg-transparent border-none outline-none px-2 text-white" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="bg-transparent border-none outline-none px-2 text-white"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <Search size={20} />
               </div>
               <select className="bg-gray-800 p-2 rounded">
@@ -113,74 +155,14 @@ const ourproduct = () => {
 
             {/* Product Grid Section */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Add product cards here */}
-              <div className="text-center">
-                <img src={dress1} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Eligio Jacket in Wool</p>
-                <p className="text-gray-400 line-through">$9,050</p>
-                <p>$3,650</p>
-              </div>
-
-              <div className="text-center">
-                <img src={bomber} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Bomber Black Jacket</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-              <div className="text-center">
-                <img src={Parka} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Classic Black Jeans</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-              <div className="text-center col-span-2">
-                <img src={girljacket} alt="Product" className="mx-auto w-[38rem] h-[50rem] object-cover" />
-                <p className="mt-2">Classic Black Jeans</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-
-              <div className="text-center">
-                <img src={puffer} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Classic Black Jeans</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-
-              <div className="text-center">
-                <img src={shirt2} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Classic Black Jeans</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-              <div className="text-center">
-                <img src={shirt3} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Classic Black Jeans</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-              <div className="text-center">
-                <img src={shirt4} alt="Product" className="mx-auto w-64 h-80 object-cover" />
-                <p className="mt-2">Classic Black Jeans</p>
-                <p className="text-gray-400 line-through">$5,000</p>
-                <p>$2,450</p>
-              </div>
-
-
-
-
-
-
-
-
-
-              {/* More products can be added in similar fashion */}
+              {filteredProducts.map((product) => (
+                <div className="text-center" key={product.name}>
+                  <img src={product.image} alt="Product" className="mx-auto w-64 h-80 object-cover" />
+                  <p className="mt-2">{product.name}</p>
+                  <p className="text-gray-400 line-through">${product.originalPrice}</p>
+                  <p>${product.price}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -190,3 +172,4 @@ const ourproduct = () => {
 };
 
 export default ourproduct;
+

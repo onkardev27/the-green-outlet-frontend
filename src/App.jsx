@@ -4,6 +4,7 @@ import Register from "./components/Register";
 import OurProduct from "./components/OurProduct";
 import Admine from "./components/Admine";
 import ProductDes from "./components/ProductDes";
+import YourOrder from "./components/YourOrder";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/ourproduct" element={<OurProduct />} />
         <Route path="/Admine" element={<Admine />} />
         <Route path="/ProductDes" element={<ProductDes />} />
+        <Route path="/YourOrder" element={<YourOrder />} />
 
       </Routes>
     </BrowserRouter>
